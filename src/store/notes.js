@@ -4,11 +4,12 @@ let lastId = 0;
 
 const slice = createSlice({
   name: "notes",
-  initialState: [{ id: 3030, description: "This is a note" }],
+  initialState: [],
   reducers: {
     noteAdded: (notes, action) => {
       notes.push({
         id: ++lastId,
+        title: action.payload.title,
         description: action.payload.description,
         starred: false,
         pinned: false,
@@ -18,20 +19,31 @@ const slice = createSlice({
     noteRemoved: (notes, action) => {
       return notes.filter((note) => note.id !== action.payload.id);
     },
-    noteEdited: (notes, action) => {
+    noteEditTitle: (notes, action) => {
       const index = notes.findIndex((note) => note.id === action.payload.id);
-      notes[index] = action.payload;
+      notes[index].title = action.payload.title;
     },
-    setAsStarred: (notes, action) => {
+    noteEditDescription: (notes, action) => {
+      const index = notes.findIndex((note) => note.id === action.payload.id);
+      notes[index].description = action.payload.description;
+    },
+    toggleStarred: (notes, action) => {
       const index = notes.findIndex((note) => note.id === action.payload.id);
       notes[index].starred = !notes[index].starred;
     },
-    setAsPinned: (notes, action) => {
+    togglePinned: (notes, action) => {
       const index = notes.findIndex((note) => note.id === action.payload.id);
       notes[index].pinned = !notes[index].pinned;
     },
   },
 });
 
-export const { noteAdded, noteRemoved, noteEdited } = slice.actions;
+export const {
+  noteAdded,
+  noteRemoved,
+  noteEditedTitle,
+  noteEditDescription,
+  togglePinned,
+  toggleStarred,
+} = slice.actions;
 export default slice.reducer;
