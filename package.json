@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.13",
     "@radix-ui/react-icons": "^1.1.1",
     "@reduxjs/toolkit": "^1.9.3",
     "react": "^18.2.0",

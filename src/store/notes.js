@@ -14,6 +14,7 @@ const slice = createSlice({
         starred: false,
         pinned: false,
         date: new Date().toLocaleDateString(),
+        color: "#ffffff",
       });
     },
     noteRemoved: (notes, action) => {
@@ -35,6 +36,10 @@ const slice = createSlice({
       const index = notes.findIndex((note) => note.id === action.payload.id);
       notes[index].pinned = !notes[index].pinned;
     },
+    colorChanged: (notes, action) => {
+      const index = notes.findIndex((note) => note.id === action.payload.id);
+      notes[index].color = action.payload.color;
+    },
   },
 });
 
@@ -45,5 +50,6 @@ export const {
   noteEditDescription,
   togglePinned,
   toggleStarred,
+  colorChanged,
 } = slice.actions;
 export default slice.reducer;

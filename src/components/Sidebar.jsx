@@ -10,7 +10,7 @@ import {
 import { Link } from "react-router-dom";
 function Sidebar() {
   return (
-    <div className='sticky top-0 h-[92vh] bg-neutral-50 w-64 flex flex-col justify-between'>
+    <div className='sticky top-[8vh] h-[92vh] bg-neutral-50 w-64 flex flex-col justify-between'>
       <div>
         <div className='w-full'>
           <div>
