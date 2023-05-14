@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 let lastId = 0;
 
 const slice = createSlice({
@@ -11,10 +10,9 @@ const slice = createSlice({
         id: ++lastId,
         title: action.payload.title,
         description: action.payload.description,
-        starred: false,
-        pinned: false,
+        starred: action.payload.starred,
+        pinned: action.payload.pinned,
         date: new Date().toLocaleDateString(),
-        color: "#ffffff",
       });
     },
     noteRemoved: (notes, action) => {
@@ -36,10 +34,6 @@ const slice = createSlice({
       const index = notes.findIndex((note) => note.id === action.payload.id);
       notes[index].pinned = !notes[index].pinned;
     },
-    colorChanged: (notes, action) => {
-      const index = notes.findIndex((note) => note.id === action.payload.id);
-      notes[index].color = action.payload.color;
-    },
   },
 });
 
@@ -50,6 +44,17 @@ export const {
   noteEditDescription,
   togglePinned,
   toggleStarred,
-  colorChanged,
 } = slice.actions;
 export default slice.reducer;
+
+export const getPinnedNotes = (notes) => {
+  return notes.filter((note) => note.pinned);
+};
+
+export const getUnpinnedNotes = (notes) => {
+  return notes.filter((note) => !note.pinned);
+};
+
+export const getStarredNotes = (notes) => {
+  return notes.filter((note) => note.starred);
+};
